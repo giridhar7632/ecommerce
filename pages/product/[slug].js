@@ -3,6 +3,7 @@ import { Product } from '../../components'
 import { urlFor, client } from '../../lib/client'
 import { useData } from '../../lib/useData'
 import { Star, Minus, Plus } from '../../lib/icons'
+import Meta from '../../components/Meta'
 
 export default function ProductDetails({ product, products }) {
 	const [index, setIndex] = useState(0)
@@ -17,6 +18,7 @@ export default function ProductDetails({ product, products }) {
 
 	return (
 		<div>
+			<Meta name={product.name} />
 			<div className='product-detail-container'>
 				<div style={{ margin: 'auto' }}>
 					<div className='image-container'>

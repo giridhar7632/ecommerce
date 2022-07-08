@@ -3,20 +3,18 @@ import Head from 'next/head'
 const makeTitle = (title, name) => {
 	if (title.toLowerCase() === name.toLowerCase()) {
 		return title
-	} else `${title} | ${name}`
+	} else return `${title} | ${name}`
 }
 
 const Meta = ({
-	title = '@Giridhar',
-	name = 'Giridhar Talla',
-	description = 'A web designer and full-stack developer, also working as a technical content writer.',
+	title = 'Headphones Store',
+	name = 'Store',
+	description = 'A place for music accessories',
 	image = '',
 	url = process.env.NEXT_APP_BASE_URL,
-	keywords = 'dev,giridhar,giridhar7632,talla,prodramming',
 	children,
 }) => (
 	<Head>
-		<meta name='keywords' content={keywords} />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
 		<meta name='robots' content='index, follow' />

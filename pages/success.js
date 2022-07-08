@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useData } from '../lib/useData'
 import { Confetti } from '../lib/confetti.min'
+import Meta from '../components/Meta'
 
 const Success = () => {
 	const ref = useRef(null)
@@ -32,6 +33,8 @@ const Success = () => {
 
 	return (
 		<div className='success-wrapper'>
+			<Meta name={'Success'} />
+
 			<div className='success'>
 				<div ref={ref} id='confetti' />
 				<h2>Thank you for your order!</h2>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useData } from '../lib/useData'
+import Meta from '../components/Meta'
 
 const Success = () => {
 	const { setCart, setTotalPrice, setProducts } = useData()
@@ -14,6 +15,8 @@ const Success = () => {
 
 	return (
 		<div className='cancel-wrapper'>
+			<Meta name={'Cancel'} />
+
 			<div className='cancel'>
 				<h2>Order cancelled successfully!!</h2>
 				<Link href='/'>
