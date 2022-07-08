@@ -18,7 +18,7 @@ export default function ProductDetails({ product, products }) {
 	return (
 		<div>
 			<div className='product-detail-container'>
-				<div>
+				<div style={{ margin: 'auto' }}>
 					<div className='image-container'>
 						<img
 							src={urlFor(image && image[index])}

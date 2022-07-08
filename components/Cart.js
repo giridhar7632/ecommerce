@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { useData } from '../lib/useData'
 import { Minus, Plus, Trash, LeftArrow, Bag } from '../lib/icons'
 import { urlFor } from '../lib/client'
+import { getStripe } from '../lib/stripe'
+import { toast } from 'react-hot-toast'
 
 const Cart = () => {
 	const {
@@ -14,6 +16,24 @@ const Cart = () => {
 		handleRemoveCart,
 	} = useData()
 	const cartRef = useRef(null)
+	const handleCheckout = async () => {
+		const stripe = await getStripe()
+
+		const response = await fetch('/api/stripe', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ cart }),
+		})
+
+		if (response.statusCode === 500) return
+
+		const data = await response.json()
+		toast.loading('Redirecting...')
+
+		stripe.redirectToCheckout({ sessionId: data.id })
+	}
 
 	return (
 		<div className='cart-wrapper' ref={cartRef}>
@@ -24,7 +44,9 @@ const Cart = () => {
 					onClick={() => setShowCart(false)}>
 					<LeftArrow />
 					<span className='heading'>Your Cart</span>
-					<span className='cart-num-items'>({products}items)</span>
+					<span className='cart-num-items'>{`(${products} ${
+						products > 1 ? 'items' : 'item'
+					})`}</span>
 				</button>
 
 				{cart.length < 1 && (
@@ -96,7 +118,7 @@ const Cart = () => {
 							<h3>${totalPrice}</h3>
 						</div>
 						<div className='btn-container'>
-							<button type='button' className='btn'>
+							<button type='button' className='btn' onClick={handleCheckout}>
 								Pay with Stripe
 							</button>
 						</div>
